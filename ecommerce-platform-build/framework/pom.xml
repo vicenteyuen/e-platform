@@ -21,5 +21,6 @@
     <module>widget</module>
   	<module>common</module>
     <module>datafile</module>
+    <module>images</module>
   </modules>
 </project>

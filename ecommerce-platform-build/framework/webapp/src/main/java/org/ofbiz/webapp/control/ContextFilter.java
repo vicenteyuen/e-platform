@@ -336,7 +336,9 @@ public class ContextFilter implements Filter {
     }
 
     public static void setCharacterEncoding(ServletRequest request) throws UnsupportedEncodingException {
-        String charset = request.getServletContext().getInitParameter("charset");
+    	// --- fix bug ---
+    	HttpServletRequest req = (HttpServletRequest)request;
+        String charset = req.getSession().getServletContext().getInitParameter("charset");
         if (UtilValidate.isEmpty(charset)) charset = request.getCharacterEncoding();
         if (UtilValidate.isEmpty(charset)) charset = "UTF-8";
         if (Debug.verboseOn()) Debug.logVerbose("The character encoding of the request is: [" + request.getCharacterEncoding() + "]. The character encoding we will use for the request is: [" + charset + "]", module);

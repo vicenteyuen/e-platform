@@ -22,23 +22,27 @@ import java.io.IOException;
 import java.io.Reader;
 import java.io.Writer;
 import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.Map;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-
-import freemarker.template.SimpleHash;
-import freemarker.template.Template;
-import freemarker.template.WrappingTemplateModel;
-
-import org.ofbiz.base.util.Debug;
-import org.ofbiz.base.util.UtilHttp;
-import org.ofbiz.base.util.template.FreeMarkerWorker;
 
 import org.jpublish.JPublishContext;
 import org.jpublish.Page;
 import org.jpublish.SiteContext;
 import org.jpublish.page.PageInstance;
 import org.jpublish.view.ViewRenderException;
+import org.ofbiz.base.util.Debug;
+import org.ofbiz.base.util.UtilHttp;
+import org.ofbiz.base.util.template.FreeMarkerWorker;
+
+import freemarker.template.SimpleHash;
+import freemarker.template.Template;
+import freemarker.template.TemplateCollectionModel;
+import freemarker.template.TemplateModel;
+import freemarker.template.TemplateModelIterator;
+import freemarker.template.WrappingTemplateModel;
 
 /**
  * JPublish View Renderer For Freemarker Template Engine
@@ -77,7 +81,19 @@ public class FreeMarkerViewRenderer extends org.jpublish.view.freemarker.FreeMar
             root.put("context", FreeMarkerWorker.getDefaultOfbizWrapper().wrap(contextMap));
             root.put("cachedInclude", new JpCacheIncludeTransform()); // only adding this in for JP!
             //root.put("jpublishContext", FreeMarkerWorker.getDefaultOfbizWrapper().wrap(context));
-            FreeMarkerViewHandler.prepOfbizRoot(root, request, response);
+            
+            Map<String,Object> rootMap = new LinkedHashMap<String,Object>();
+            
+            // --- create mapping for handle code ---
+            TemplateCollectionModel tcm = root.keys();
+            
+            TemplateModelIterator iter = tcm.iterator();
+            while (iter.hasNext()) {
+            	TemplateModel tm =  iter.next();
+            	rootMap.put( tm.toString() , root.get(tm.toString()));
+            }
+            
+            FreeMarkerViewHandler.prepOfbizRoot(rootMap, request, response);
         } catch (Exception e) {
             throw new ViewRenderException(e);
         }

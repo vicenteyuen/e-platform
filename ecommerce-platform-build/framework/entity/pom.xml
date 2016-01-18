@@ -9,7 +9,6 @@
   </parent>
   <groupId>org.ofbiz</groupId>
   <artifactId>entity</artifactId>
-  <version>0.0.1-SNAPSHOT</version>
   <name>entity</name>
   <url>http://maven.apache.org</url>
   <properties>

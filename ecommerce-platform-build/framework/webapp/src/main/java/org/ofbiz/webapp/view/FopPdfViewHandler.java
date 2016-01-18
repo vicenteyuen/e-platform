@@ -59,11 +59,14 @@ public class FopPdfViewHandler extends JPublishViewHandler {
         ByteArrayOutputStream out = null;
         Reader reader = new StringReader(writer.toString());
         Source src = new StreamSource(reader);
+        /*
+         * remove error code
         try {
             ApacheFopWorker.transform(src, out, null, contentType);
         } catch (GeneralException e) {
             throw new ViewHandlerException(e.getMessage(), e.getNested());
         }
+        */
 
         // set the content type and length
         response.setContentType(contentType);
