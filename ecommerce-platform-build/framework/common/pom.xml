@@ -7,16 +7,47 @@
   </parent>
   <groupId>org.ofbiz</groupId>
   <artifactId>common</artifactId>
+  <dependencyManagement>
+    <dependencies>
+      <dependency>
+        <groupId>org.apache.avalon.framework</groupId>
+        <artifactId>avalon-framework-impl</artifactId>
+        <version>4.3.1</version>
+        <scope>runtime</scope>
+      </dependency>
+      <dependency>
+        <groupId>org.apache.avalon.framework</groupId>
+        <artifactId>avalon-framework-api</artifactId>
+        <version>4.3.1</version>
+      </dependency>
+    </dependencies>
+  </dependencyManagement>  
   <dependencies>
-  	<dependency>
-  		<groupId>org.ofbiz</groupId>
-  		<artifactId>service</artifactId>
-  		<version>0.0.1-SNAPSHOT</version>
-  	</dependency>
   	<dependency>
   		<groupId>org.apache.xmlgraphics</groupId>
   		<artifactId>fop</artifactId>
   		<version>1.1</version>
+  	</dependency>
+  	<dependency>
+  		<groupId>net.sf.json-lib</groupId>
+  		<artifactId>json-lib</artifactId>
+  		<version>2.2.3</version>
+  		<classifier>jdk15</classifier>
+  	</dependency>
+  	<dependency>
+  		<groupId>commons-net</groupId>
+  		<artifactId>commons-net</artifactId>
+  		<version>3.3</version>
+  	</dependency>
+  	<dependency>
+  		<groupId>org.ofbiz</groupId>
+  		<artifactId>widget</artifactId>
+  		<version>${parent.version}</version>
+  	</dependency>
+  	<dependency>
+  		<groupId>com.sun.mail</groupId>
+  		<artifactId>javax.mail</artifactId>
+  		<version>1.5.1</version>
   	</dependency>
   </dependencies>
 </project>
